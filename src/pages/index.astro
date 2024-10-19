@@ -1,0 +1,72 @@
+---
+import { getCollection } from "astro:content";
+import { Header } from "@components/misc";
+import { BaseHead } from "@components/seo";
+import { SITE_TITLE } from "@data/index";
+import { SITE_DESCRIPTION } from "@data/index";
+import RootLayout from "@layouts/root-layout.astro";
+import { clsx } from "@utils/index";
+import AnimatedText from "src/styles/animatedText.astro";
+
+const whoami = await getCollection("whoami");
+const whoamiData = whoami[0].data; // Get the first item from the collection
+const { title, title1, description } = whoamiData;
+const { Content } = await whoami[0].render();
+const textColorPairs = [
+  { text: "generalist.", color: "#FFB3BA" },
+  { text: "designer.", color: "#BAFFC9" },
+  { text: "product lover.", color: "#BAE1FF" },
+  { text: "software developer.", color: "#FFFFBA" },
+  { text: "ml enthusiast.", color: "#FFDFBA" },
+  { text: "extrovert.", color: "#E0BBE4" },
+  { text: "community lover.", color: "#BAE1FF" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={SITE_TITLE}
+      description={SITE_DESCRIPTION}
+      image="/images/ogimage.png"
+    />
+  </head>
+
+  <RootLayout>
+    <div class="flex flex-col w-full max-w-xl mx-auto">
+      <Header />
+      <div class="py-12 sm:py-12">
+        <!-- Added padding top and bottom -->
+        <h1
+          class="text-left text-[min(12vw,72px)] font-medium leading-[1.1] tracking-[-2px] sm:tracking-[-4px] flex flex-col items-start justify-start"
+        >
+          <div class="flex items-center gap-x-4">
+            <span>{title}</span>
+            <img
+              src="/images/ram_prof.jpg"
+              class="w-16 h-16 rounded-lg object-cover"
+              alt="Ram's profile"
+            />
+          </div>
+
+          {title1}
+          <AnimatedText textColorPairs={textColorPairs} />
+        </h1>
+      </div>
+      <span class="sr-only"> {description} </span>
+      <div
+        class={clsx(
+          "w-full prose prose-lg prose-p:font-medium dark:prose-invert prose-a:underline prose-a:bg-amber-50 prose-a:decoration-amber-500 items-start justify-start",
+          "dark:prose-a:bg-black dark:prose-a:decoration-blue-300 dark:prose-a:decoration-wavy dark:prose-a:font-extrabold dark:prose-a:hover:bg-teal-900 dark:prose-a:hover:text-white",
+          "prose-h1:font-medium prose-h2:font-medium prose-h3:font-medium prose-h4:font-medium prose-h5:font-medium prose-h6:font-medium",
+          "prose-h1:tracking-tight prose-h2:tracking-tight prose-h3:tracking-tight prose-h4:tracking-tight prose-h5:tracking-tight prose-h6:tracking-tight",
+          "prose-ul:font-medium prose-ol:font-medium prose-li:font-medium",
+          "prose-ul:space-y-2 prose-ol:space-y-3 prose-li:space-y-3"
+        )}
+      >
+        <Content />
+      </div>
+    </div>
+  </RootLayout>
+</html>

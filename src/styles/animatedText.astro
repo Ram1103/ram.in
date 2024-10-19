@@ -1,0 +1,65 @@
+---
+export interface Props {
+  textColorPairs: { text: string; color: string }[];
+}
+
+const { textColorPairs } = Astro.props;
+---
+
+<span class="inline-block" id="animated-text"></span>
+
+<script define:vars={{ textColorPairs }}>
+  let currentIndex = 0;
+  let isDeleting = false;
+  let text = '';
+  let typingSpeed = 100;
+  let pauseEnd = 1000;
+  const animatedText = document.getElementById('animated-text');
+
+  function type() {
+    const fullText = textColorPairs[currentIndex].text;
+    
+    if (isDeleting) {
+      text = fullText.substring(0, text.length - 1);
+    } else {
+      text = fullText.substring(0, text.length + 1);
+    }
+
+    if (animatedText) {
+      animatedText.textContent = text;
+      animatedText.style.color = textColorPairs[currentIndex].color;
+    }
+
+    let typeSpeed = typingSpeed;
+
+    if (isDeleting) {
+      typeSpeed /= 2; // Faster when deleting
+    }
+
+    if (!isDeleting && text === fullText) {
+      typeSpeed = pauseEnd;
+      isDeleting = true;
+    } else if (isDeleting && text === '') {
+      isDeleting = false;
+      currentIndex = (currentIndex + 1) % textColorPairs.length;
+    }
+
+    setTimeout(type, typeSpeed);
+  }
+
+  // Start the typing effect
+  setTimeout(type, pauseEnd);
+</script>
+
+<style>
+  #animated-text::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+  }
+
+  @keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+</style>
