@@ -4,9 +4,9 @@ import { Dots } from "@components/misc";
 const { title, description, slug, ship_count } = Astro.props;
 ---
 
-<a href={`/ships/${slug}`}>
+<a href={`/timeline/${slug}`}>
 	<!-- sronly h3 -->
 	<h3 class='sr-only'>{title}</h3>
-	<p class='sr-only'>{description} ships</p>
+	<p class='sr-only'>{description}timeline</p>
 	<Dots ship_count={ship_count} />
 </a>

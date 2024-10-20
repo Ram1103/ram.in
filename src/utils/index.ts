@@ -51,7 +51,7 @@ export async function groupShipsByYearMonthSorted(): Promise<
 	Record<string, Ship[]>
 > {
 	// Fetch ships collection
-	const ships = await getCollection("ship");
+	const ships = await getCollection("timeline");
 
 	// Group ships by year and month
 	const groupedShips = ships.reduce<Record<string, Ship[]>>(
