@@ -7,20 +7,13 @@ import { SITE_DESCRIPTION } from "@data/index";
 import RootLayout from "@layouts/root-layout.astro";
 import { clsx } from "@utils/index";
 import AnimatedText from "src/styles/animatedText.astro";
+import { textColorPairs } from "src/content/whoami/multiliner"
 
 const whoami = await getCollection("whoami");
 const whoamiData = whoami[0].data; // Get the first item from the collection
 const { title, title1, description } = whoamiData;
 const { Content } = await whoami[0].render();
-const textColorPairs = [
-  { text: "generalist.", color: "#FFB3BA" },
-  { text: "designer.", color: "#BAFFC9" },
-  { text: "product lover.", color: "#BAE1FF" },
-  { text: "software developer.", color: "#FFFFBA" },
-  { text: "ml enthusiast.", color: "#FFDFBA" },
-  { text: "extrovert.", color: "#E0BBE4" },
-  { text: "community lover.", color: "#BAE1FF" },
-];
+
 ---
 
 <!doctype html>
@@ -58,7 +51,7 @@ const textColorPairs = [
       <div
         class={clsx(
           "w-full prose prose-lg prose-p:font-medium dark:prose-invert prose-a:underline prose-a:bg-amber-50 prose-a:decoration-amber-500 items-start justify-start",
-          "dark:prose-a:bg-black dark:prose-a:decoration-blue-300 dark:prose-a:decoration-wavy dark:prose-a:font-extrabold dark:prose-a:hover:bg-teal-900 dark:prose-a:hover:text-white",
+          "dark:prose-a:bg-teal-900 dark:prose-a:decoration-blue-300 dark:prose-a:decoration-wavy dark:prose-a:font-extrabold dark:prose-a:hover:text-white",
           "prose-h1:font-medium prose-h2:font-medium prose-h3:font-medium prose-h4:font-medium prose-h5:font-medium prose-h6:font-medium",
           "prose-h1:tracking-tight prose-h2:tracking-tight prose-h3:tracking-tight prose-h4:tracking-tight prose-h5:tracking-tight prose-h6:tracking-tight",
           "prose-ul:font-medium prose-ol:font-medium prose-li:font-medium",

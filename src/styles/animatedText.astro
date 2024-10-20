@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  textColorPairs: { text: string; color: string }[];
+  textColorPairs: { text: string; colorClass: string }[];
 }
 
 const { textColorPairs } = Astro.props;
@@ -27,7 +27,10 @@ const { textColorPairs } = Astro.props;
 
     if (animatedText) {
       animatedText.textContent = text;
-      animatedText.style.color = textColorPairs[currentIndex].color;
+      // Remove any existing color classes
+      animatedText.className = 'inline-block';
+      // Add the new color class
+      animatedText.classList.add(textColorPairs[currentIndex].colorClass);
     }
 
     let typeSpeed = typingSpeed;
