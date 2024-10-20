@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 
 export const GET: APIRoute = async () => {
-	const books = await getCollection("books");
+	const posts = await getCollection("writing");
 
 	// Generate the sitemap
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -14,7 +14,7 @@ export const GET: APIRoute = async () => {
         <priority>1.0</priority>
       </url>
 
-      ${books
+      ${posts
 				.map(
 					(post) => `
         <url>
