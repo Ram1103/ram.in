@@ -6,7 +6,8 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://www.sanju.sh",
+	site: "https://ram1103.github.io",
+	base: 'ram.in',
 	integrations: [
 		mdx(),
 		sitemap({
