@@ -3,10 +3,11 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@data/index";
 import { getCollection } from "astro:content";
 
 export async function GET(context) {
-	const [posts, thoughts, timeline] = await Promise.all([
+	const [posts, thoughts, timeline , desings] = await Promise.all([
 		getCollection("writing"),
 		getCollection("thought"),
 		getCollection("timeline"),
+		getCollection("desings"),
 	]);
 
 	return rss({
@@ -22,9 +23,13 @@ export async function GET(context) {
 				...thought.data,
 				link: `/thoughts/${thought.slug}/`,
 			})),
-			...timeline.map((timeline) => ({
-				...timeline.data,
-				link: `/timeline/${timeline.slug}/`,
+			...timeline.map((event) => ({
+				...event.data,
+				link: `/timeline/${event.slug}/`,
+			})),
+			...desings.map((design) => ({
+				...design.data,
+				link: `/designs/${design.slug}/`,
 			})),
 		],
 	});
