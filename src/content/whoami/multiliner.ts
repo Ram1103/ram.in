@@ -7,4 +7,5 @@ export const textColorPairs=[
     { text: "extrovert.", colorClass: "text-purple-400" },
     { text: "community vibe keeper.", colorClass: "text-indigo-400" },
     { text: "coffee addict.", colorClass: "text-pink-400" },
+    { text: "book worm.", colorClass: "text-teal-400" },
   ];

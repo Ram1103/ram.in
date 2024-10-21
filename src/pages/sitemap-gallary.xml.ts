@@ -8,7 +8,7 @@ export const GET: APIRoute = async () => {
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url>
-        <loc>${new URL("/books", import.meta.env.SITE).href}</loc>
+        <loc>${new URL("/gallery", import.meta.env.SITE).href}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
@@ -18,7 +18,7 @@ export const GET: APIRoute = async () => {
 				.map(
 					(post) => `
         <url>
-          <loc>${new URL("/books/" + post.slug, import.meta.env.SITE).href}</loc>
+          <loc>${new URL("/gallery/" + post.slug, import.meta.env.SITE).href}</loc>
           <lastmod>${post.data.pubDate.toISOString()}</lastmod>
         <changefreq>daily</changefreq>
           <priority>1.0</priority>

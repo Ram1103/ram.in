@@ -1,0 +1,58 @@
+---
+import { Header } from '@components/misc';
+import { BaseHead } from '@components/seo';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@data/index';
+import RootLayout from '@layouts/root-layout.astro';
+
+const sections = [
+  { id: "designs", title: "Designs", link: "/designs" },
+  { id: "projects", title: "Projects", link: "/projects" },
+  { id: "photography", title: "Photography", link: "/photography" },
+  { id: "books", title: "Books", link: "/books" }
+];
+---
+
+<!doctype html>
+<html lang='en'>
+	<head>
+		<BaseHead
+			title={SITE_TITLE}
+			description={SITE_DESCRIPTION}
+			image='/images/ogimage.png'
+		/>
+		<style>
+			.section-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				cursor: pointer;
+				text-decoration: none;
+				color: inherit;
+			}
+			.arrow-icon {
+				transition: transform 0.3s ease;
+			}
+			.section-header:hover .arrow-icon {
+				transform: rotate(90deg);
+			}
+		</style>
+	</head>
+	<RootLayout>
+		<div id='Header+title' class='flex flex-col w-full gap-6 max-w-xl'>
+			<Header />
+			<h1 class='w-full text-7xl font-medium tracking-tight mb-4'>Gallery</h1>
+			<h3 class='w-full text-3xl font-normal'> Here are collection of things which I do. Let me know how you like em! </h3>
+			{sections.map(section => (
+				<section id={section.id} class="my-8">
+					<a href={section.link} class="section-header">
+						<h2 class="text-3xl font-medium mb-4">{section.title}</h2>
+						<svg class="arrow-icon w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M12 5V19M12 5L6 11M12 5L18 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a>
+					<!-- Content for each section will go here -->
+				</section>
+			))}
+		</div>
+	</RootLayout>
+</html>

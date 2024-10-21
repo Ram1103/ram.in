@@ -25,7 +25,7 @@ export const menuItems: MenuItem[] = [
 		url: "/timeline",
 	},
 	{
-		label: "books",
-		url: "/books",
+		label: "gallery",
+		url: "/gallery",
 	},
 ];
