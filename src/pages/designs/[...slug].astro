@@ -1,7 +1,7 @@
 ---
-import  DesignsLayout  from '@layouts/designs-layout.astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import { ScrollProgress } from '@components/misc';
+import DesignsLayout from '@layouts/designs-layout.astro';
 
 const posts = await getCollection('designs');
 type Props = CollectionEntry<'designs'>;

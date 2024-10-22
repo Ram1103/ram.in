@@ -3,12 +3,13 @@ import { Header } from '@components/misc';
 import { BaseHead } from '@components/seo';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@data/index';
 import RootLayout from '@layouts/root-layout.astro';
+import CollageSection from '@components/misc/collageSection.astro';
 
 const sections = [
-  { id: "designs", title: "Designs", link: "/designs" },
-  { id: "projects", title: "Projects", link: "/projects" },
-  { id: "photography", title: "Photography", link: "/photography" },
-  { id: "books", title: "Books", link: "/books" }
+  { id: "designs", title: "Designs", link: "/designs", color: "#FF6B6B" },
+  { id: "projects", title: "Projects", link: "/projects", color: "#4ECDC4" },
+  { id: "photography", title: "Photography", link: "/photography", color: "#45B7D1" },
+  { id: "books", title: "Books", link: "/books", color: "#96CEB4" }
 ];
 ---
 
@@ -28,9 +29,10 @@ const sections = [
 				cursor: pointer;
 				text-decoration: none;
 				color: inherit;
+				transition: color 0.3s ease;
 			}
 			.arrow-icon {
-				transition: transform 0.3s ease;
+				transition: transform 0.3s ease, stroke 0.3s ease;
 			}
 			.section-header:hover .arrow-icon {
 				transform: rotate(90deg);
@@ -42,15 +44,27 @@ const sections = [
 			<Header />
 			<h1 class='w-full text-7xl font-medium tracking-tight mb-4'>Gallery</h1>
 			<h3 class='w-full text-2xl font-normal'> Here are collection of things which I am interested in. Let me know how you like em! </h3>
+			<CollageSection />
 			{sections.map(section => (
-				<section id={section.id} class="my-8">
-					<a href={section.link} class="section-header">
-						<h2 class="text-3xl font-medium mb-4">{section.title}</h2>
-						<svg class="arrow-icon w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M12 5V19M12 5L6 11M12 5L18 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				<section id={section.id}>
+					<a 
+						href={section.link} 
+						class="section-header" 
+						style={`--section-color: ${section.color}`}
+						onmouseenter={`this.style.color='${section.color}'`}
+						onmouseleave="this.style.color='inherit'"
+					>
+						<h2 class="text-3xl font-medium">{section.title}</h2>
+						<svg 
+							class="arrow-icon w-6 h-6" 
+							viewBox="0 0 24 24" 
+							fill="none" 
+							xmlns="http://www.w3.org/2000/svg"
+							style={`stroke: currentColor`}
+						>
+							<path d="M12 5V19M12 5L6 11M12 5L18 11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
 					</a>
-					<!-- Content for each section will go here -->
 				</section>
 			))}
 		</div>
