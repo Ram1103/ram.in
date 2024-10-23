@@ -4,6 +4,7 @@ import { BaseHead } from '@components/seo';
 import { SITE_DESCRIPTION, SITE_TITLE } from '@data/index';
 import RootLayout from '@layouts/root-layout.astro';
 import CollageSection from '@components/misc/collageSection.astro';
+import { getCollection } from 'astro:content';
 
 const sections = [
   { id: "designs", title: "Designs", link: "/designs", color: "#FF6B6B" },
@@ -11,6 +12,11 @@ const sections = [
   { id: "photography", title: "Photography", link: "/photography", color: "#45B7D1" },
   { id: "books", title: "Books", link: "/books", color: "#96CEB4" }
 ];
+
+const gallery = await getCollection("gallery");
+const galleryData = gallery[0].data; // Get the first item from the collection
+const { title, description } = galleryData;
+const { Content } = await gallery[0].render();
 ---
 
 <!doctype html>
@@ -42,11 +48,12 @@ const sections = [
 	<RootLayout>
 		<div id='Header+title' class='flex flex-col w-full gap-6 max-w-xl'>
 			<Header />
-			<h1 class='w-full text-7xl font-medium tracking-tight mb-4'>Gallery</h1>
-			<h3 class='w-full text-2xl font-normal'> Here are collection of things which I am interested in. Let me know how you like em! </h3>
+			<h1 class='w-full text-7xl font-medium tracking-tight mb-4'>{title}</h1>
+			<h3 class='w-full text-2xl font-normal'> {description} </h3>
 			<CollageSection />
+			<div class="mb-5">
 			{sections.map(section => (
-				<section id={section.id}>
+				<section id={section.id} class="mb-3">
 					<a 
 						href={section.link} 
 						class="section-header" 
@@ -67,6 +74,8 @@ const sections = [
 					</a>
 				</section>
 			))}
+			</div>
+			<Content />
 		</div>
 	</RootLayout>
 </html>
