@@ -6,7 +6,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://ram1103.github.io/ram.in",
+	site: "https://ram1103.github.io",
 	integrations: [
 		mdx(),
 		sitemap({
@@ -16,4 +16,6 @@ export default defineConfig({
 		}),
 		tailwind(),
 	],
+	output: "server",
+	adapter: cloudflare(),
 });
