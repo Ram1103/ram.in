@@ -6,7 +6,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://ram1103.github.io",
+	site: "https://legacyofram.in",
 	integrations: [
 		mdx(),
 		sitemap({
@@ -19,3 +19,4 @@ export default defineConfig({
 	output: "server",
 	adapter: cloudflare(),
 });
+

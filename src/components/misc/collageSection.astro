@@ -1,0 +1,67 @@
+---
+ // Any necessary imports can go here
+---
+
+<div id="default-carousel" class="relative w-full" data-carousel="slide">
+    <!-- Carousel wrapper -->
+    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <!-- Item 1 -->
+        <div class="ease-in-out" data-carousel-item>
+            <img src="https://via.placeholder.com/600" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Slide 1">
+        </div>
+        <!-- Item 2 -->
+        <div class="hidden ease-in-out" data-carousel-item>
+            <img src="/images/ram_prof.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Slide 2">
+        </div>
+        <!-- Item 3 -->
+        <div class="hidden ease-in-out" data-carousel-item>
+            <img src="https://via.placeholder.com/600" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Slide 3">
+        </div>
+        <!-- Add more items if necessary -->
+    </div>
+    
+   <!-- Slider indicators -->
+   <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+      <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+      <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+      <button type="button" class="w-3 h-3 rounded-full bg-gray-300" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+   </div>
+</div>
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+       const items = document.querySelectorAll('[data-carousel-item]');
+       const indicators = document.querySelectorAll('[data-carousel-slide-to]');
+       let currentItemIndex = 0;
+       const intervalTime = 3000; // Time between slides (in milliseconds)
+
+       const showItem = (index) => {
+           items.forEach((item, i) => {
+               item.classList.toggle('hidden', i !== index);
+               indicators[i].setAttribute('aria-current', i === index);
+           });
+       };
+
+       // Auto-slide functionality
+       const autoSlide = () => {
+           currentItemIndex = (currentItemIndex + 1) % items.length;
+           showItem(currentItemIndex);
+       };
+
+       // Show the first item
+       showItem(currentItemIndex);
+
+       // Set interval for auto sliding
+       let slideInterval = setInterval(autoSlide, intervalTime);
+
+       // Indicator functionality to go to a specific slide
+       indicators.forEach((indicator, index) => {
+           indicator.onclick = () => {
+               clearInterval(slideInterval); // Stop auto-slide when user interacts
+               currentItemIndex = index;
+               showItem(currentItemIndex);
+               setTimeout(() => slideInterval = setInterval(autoSlide, intervalTime), intervalTime); // Restart auto-slide
+           };
+       });
+   });
+</script>
